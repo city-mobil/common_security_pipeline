@@ -53,10 +53,10 @@ directory with main pipeline
 
 
 ## Участники проекта:
-@httpnotonly - дал много полезной информации на старте
-https://t.me/true_hero - реализация ранних версий пайплайна
-@edgesecc (telegram: @edgesec) - стратегическое сопровождение, полный рефакторинг, вывод в паблик
-https://t.me/BlackDiver - здоровая критика
+- @httpnotonly - дал много полезной информации на старте
+- https://t.me/true_hero - реализация ранних версий пайплайна
+- @edgesecc (telegram: @edgesec) - стратегическое сопровождение, полный рефакторинг, вывод в паблик
+- https://t.me/BlackDiver - здоровая критика
 
 
 
