@@ -1,0 +1,10 @@
+.*\.min\.js$
+.*\.css$
+
+(.*/)?testdata/
+(.*/)?vendor/
+(.*/)?vendors/
+(.*/)?bitrix/
+(.*/)?test_certs/
+.gitlab-ci.yml
+(.*/)?common-pipeline/

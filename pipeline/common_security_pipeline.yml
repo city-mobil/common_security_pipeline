@@ -1,0 +1,8 @@
+stages:
+    - defectdojo_prepare
+    - security_tools
+
+include:
+    - local: pipeline/defect_dojo_prepare.yml
+    - local: pipeline/dd_upload_report.yml
+    - local: pipeline/security_tools.yml

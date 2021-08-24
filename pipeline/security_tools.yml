@@ -1,0 +1,152 @@
+.security_parent_job:
+  stage: security_tools
+  extends:
+    - .dd_upload_report
+  tags: [docker]
+  allow_failure: true
+
+
+#### GitLeaks #####
+appsec:gitleaks:
+  extends: [.security_parent_job]
+  variables:
+    DD_SCAN_TYPE: 'Gitleaks Scan'
+    DD_REPORT_FILE_NAME: 'gitleaks.json'
+    GIT_DEPTH: 0
+  image:
+    name: ${CI_SERVER_HOST}/gitleaks:master #CHECK IT
+  dependencies:
+    - defectdojo_prepare
+  script:
+   - |
+    echo "[x] Run GitLekas"
+    echo -e "Commit count is:  $(git log |grep 'Author:' |wc -l)"
+    set -x
+    gitleaks --no-git --path=./ -v --report $DD_REPORT_FILE_NAME  || true    
+    
+
+
+
+### trufflehog ####
+secrets:trufflehog:
+  extends: [.security_parent_job]
+  variables:
+    DD_SCAN_TYPE: 'Trufflehog Scan'
+    DD_REPORT_FILE_NAME: 'trufflehog.report'
+    GIT_DEPTH: 0
+  dependencies:
+    - defectdojo_prepare
+  image:
+    name: ${CI_SERVER_HOST}/trufflehog:master #CHECK IT
+  script:
+   - |
+      echo "[x] Run Trufflehog"
+      set -x
+      #download trufflehog rules from common-pipeline
+      git clone "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}//common-pipeline/"
+      cd common-pipeline
+      git checkout v3
+      cd ../
+      git checkout ${CI_COMMIT_REF_NAME} #need for fix bug in trufflehog
+      echo -e "Commit count is:  $(git log |grep 'Author:' |wc -l)"
+      ##need denamic on entropy=False
+      trufflehog --regex --entropy=False --exclude_paths='./common-pipeline/config/trufflehog-exclude-patterns.txt' ./  --json > $DD_REPORT_FILE_NAME || true
+
+
+
+### GoSec ###
+sast:gosec:
+  extends: [.security_parent_job]
+  variables:
+    DD_SCAN_TYPE: 'Gosec Scanner'
+    DD_REPORT_FILE_NAME: 'gosec.json'
+  dependencies:
+    - defectdojo_prepare
+  image:
+    name: ${CI_SERVER_HOST}/gosec:master
+  script:
+   - |
+      echo "[x] Run Gosec"
+      set -x
+      gosec -exclude=G104,G404,G501,G601 -no-fail -fmt json -out $DD_REPORT_FILE_NAME ./...  > /dev/null || true
+
+
+### phpcs ###
+sast:phpcs:
+  extends: [.security_parent_job]
+  image: ${CI_SERVER_HOST}/phpcs-security-audit:master #CHECK IT
+  variables:
+    DD_SCAN_TYPE: 'PHP Security Audit v2'
+    DD_REPORT_FILE_NAME: 'phpcs.json'
+  dependencies:
+    - defectdojo_prepare
+  script:
+    - echo "[x] Run PHPcs"
+    - set -x
+    - /tmp/vendor/bin/phpcs --standard=/tmp/base_ruleset.xml --extensions=php --report=json --report-file=$DD_REPORT_FILE_NAME ./ --ignore=*.js,*.html,*.css || true
+
+  
+### Semgrep - cloud ####
+sast:semgrep_cloud:
+  stage: security_tools
+  image: returntocorp/semgrep-agent:v1
+  script: 
+    - echo "[x] Run Semgrep [Cloud]"
+    - set -x
+    - semgrep-agent || true
+  dependencies:
+    - defectdojo_prepare
+  variables:
+    SEMGREP_APP_DEPLOYMENT_ID: 1111 #CHECK IT
+    SEMGREP_APP_TOKEN: 11111  #CHECK IT
+## remove rule for activate    
+  rules:
+  - if: $CI_COMMIT_BRANCH == "Never"
+
+### Semgrep - DD ####
+sast:semgrep_dd:
+  extends: [.security_parent_job]
+  image: returntocorp/semgrep-agent:v1
+  script: 
+    - apk add curl jq
+    - echo "[x] Run Semgrep [DefectDojo]"
+    - #maybe json output will be better for you
+    - semgrep --config p/security-audit --config p/secrets --sarif . > semgrep.json
+  dependencies:
+    - defectdojo_prepare
+  variables:
+    DD_SCAN_TYPE: 'SARIF'
+    DD_REPORT_FILE_NAME: 'semgrep.json'
+    
+
+
+## dependencycheck ##
+dep:dependencycheck:
+ extends: [.security_parent_job]
+ image: ${CI_SERVER_HOST}/dependencycheck:master
+ variables:
+   DD_SCAN_TYPE: 'Dependency Check Scan'
+   DD_REPORT_FILE_NAME: 'dependency-check-report.xml'
+ script:
+     - #FIX IT (credentials for connect to DB)
+     - /usr/share/dependency-check/bin/dependency-check.sh --project ${CI_PROJECT_NAME} --out . --scan . -f XML --dbDriverName com.mysql.cj.jdbc.Driver --dbDriverPath /usr/share/dependency-check/plugins/mysql-connector-java-8.0.21.jar --connectionString 'jdbc:mysql://mysql.example.com:3306/dependencycheck?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC' --dbPassword ${DEPCHECK_MYSQL} --dbUser MySQLUser
+ artifacts:
+   paths:
+     - dependency-check-report.xml
+ rules:
+  - if: $CI_COMMIT_BRANCH == "Never"
+
+##todo: add help for local mysql cache
+  
+
+## trivy ##
+  ## move to public after 5 september 2021
+
+
+
+
+
+
+
+
+  

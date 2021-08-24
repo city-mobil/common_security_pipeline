@@ -1,0 +1,55 @@
+.dd_upload_report:
+  before_script:
+    - source ./security_variables.env
+  after_script:
+    - |
+      
+      #read variables from dd_prepare job
+      source security_variables.env
+
+      echo -e "\n\e[31m[x] Load variables:"
+      echo "    DD_BASE_URL=${DD_BASE_URL}"
+      echo "    DD_SCAN_TYPE=${DD_SCAN_TYPE}"
+      echo "    DD_ENGAGEMENT_ID=${DD_ENGAGEMENT_ID}"
+      echo "    DD_ENGAGMENT_NAME=${DD_ENGAGMENT_NAME}"
+      echo "    DD_PROJECT_ENV=${DD_PROJECT_ENV}"
+      
+      #for debug only#
+      #echo "    $(declare -p |grep DD)"
+      
+      echo -e "\033[0m"
+      echo -e "===================================\n"
+
+      if test -f "$DD_REPORT_FILE_NAME"; then
+      echo -e "\e[31m[x] File ${DD_REPORT_FILE_NAME} exist"
+      echo -en "    Size is: " && ls -lah ${DD_REPORT_FILE_NAME} |tr -s ' ' |cut -d ' ' -f5
+      # echo -e "\033[0m" 
+      #send request
+      echo -e "\e[31m[x] Send report via curl. Response is:"
+      #set -x
+      /usr/bin/curl -s --request POST "$DD_BASE_URL/api/v2/import-scan/" \
+        -H "accept: application/json" \
+        -H "Content-Type: multipart/form-data" \
+        -H "Authorization: Token $DD_AUTH_KEY" \
+        -F "verified=False" \
+        -F "active=False" \
+        -F "environment=${DD_PROJECT_ENV}" \
+        -F "minimum_severity=Low" \
+        -F "file=@${PWD}/$DD_REPORT_FILE_NAME" \
+        -F "scan_type=$DD_SCAN_TYPE" \
+        -F "engagement=$DD_ENGAGEMENT_ID"  | jq > ./dd_result.txt || true
+        cat dd_result.txt
+      #minimum_severity=Low - Important. Affects the number of final results in DD
+      echo "[x] You can check engagment results at ${DD_BASE_URL}/engagement/${DD_ENGAGEMENT_ID}"
+        test_id=$(cat ./dd_result.txt |grep "\"test\"\: " |tr -s ' '  |cut -d ' '  -f 3)
+        echo "[x] You can check test results at ${DD_BASE_URL}/product/${DD_PRODUCT_ID}/finding/all?test=${test_id}"
+        else
+            echo -e "\e[31m[!] File $DD_REPORT_FILE_NAME NOT EXIST\033[0m"
+        fi
+         
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - ${PWD}/$DD_REPORT_FILE_NAME
+    when: always
+

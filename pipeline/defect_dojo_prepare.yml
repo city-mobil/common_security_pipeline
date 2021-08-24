@@ -1,0 +1,16 @@
+defectdojo_prepare:
+  stage: defectdojo_prepare 
+  image:
+    name: ${CI_SERVER_HOST}/common-pipeline:v3 #CHECK IT
+  artifacts:
+    paths: [security_variables.env]
+  script:
+   - |
+    set -x
+    /dd_prepare/make_variables.sh
+    python3 /dd_prepare/dd_prepare.py
+  tags: [docker]
+
+
+
+
