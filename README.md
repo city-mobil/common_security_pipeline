@@ -48,10 +48,6 @@ directory with main pipeline
 - генерация пайплайна в рантайме на основе шаблонов jinja2
 - добавление security-тулов
 
-
-
-
-
 ## Участники проекта:
 - @httpnotonly - дал много полезной информации на старте
 - https://t.me/true_hero - реализация ранних версий пайплайна
@@ -59,5 +55,11 @@ directory with main pipeline
 - https://t.me/BlackDiver - здоровая критика
 
 
+# реализация на инфраструктуре gitlab
+Просто смотреть исходник на github не очень интересно. Лучше смотреть на работающие пайплайны
+https://gitlab.com/common_security_pipeline/common_security_pipeline
 
+
+## доп материалы:
+презентация: https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8
 
