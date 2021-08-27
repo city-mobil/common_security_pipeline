@@ -10,6 +10,7 @@
   - [gosec](https://github.com/securego/gosec)
   - [phpcs](https://github.com/FloeDesignTechnologies/phpcs-security-audit)
   - [semgrep](https://github.com/returntocorp/semgrep)
+
 Используйте данный репозиторий чтобы построить безопасность в цикле CI/CD.
 
 ## Quick Start
@@ -39,7 +40,7 @@
 - [Георгий Старостин](https://www.linkedin.com/in/georgii-starostin-06932942/) - здоровая критика
 
 # Реализация на инфраструктуре gitlab
-Просто смотреть исходник на github не очень интересно. Лучше смотреть на (работающие пайплайны)[https://gitlab.com/common_security_pipeline/common_security_pipeline]
+Просто смотреть исходник на github не очень интересно. Лучше смотреть на [работающие пайплайны](https://gitlab.com/common_security_pipeline/common_security_pipeline)
 
 
 ## Доп. материалы:
