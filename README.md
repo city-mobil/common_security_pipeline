@@ -4,12 +4,12 @@
 - GitLab
 - DefectDojo
 - OpenSouce tools
-  - (gitleaks)[https://github.com/zricethezav/gitleaks]
-  - (trufflehog)[https://github.com/trufflesecurity/truffleHog]
-  - (dependency check)[https://github.com/jeremylong/DependencyCheck]
-  - (gosec)[https://github.com/securego/gosec]
-  - (phpcs)[https://github.com/FloeDesignTechnologies/phpcs-security-audit]
-  - (semgrep)[https://github.com/returntocorp/semgrep]
+  - [gitleaks](https://github.com/zricethezav/gitleaks)
+  - [trufflehog](https://github.com/trufflesecurity/truffleHog)
+  - [dependency check](https://github.com/jeremylong/DependencyCheck)
+  - [gosec](https://github.com/securego/gosec)
+  - [phpcs](https://github.com/FloeDesignTechnologies/phpcs-security-audit)
+  - [semgrep](https://github.com/returntocorp/semgrep)
 Используйте данный репозиторий чтобы построить безопасность в цикле CI/CD.
 
 ## Quick Start
@@ -43,7 +43,7 @@
 
 
 ## Доп. материалы:
-Презентация (ZeroNights2021)[https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8] 
+Презентация [ZeroNights2021](https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8)
 
 # Спонсор
 ![](static/img/city.logo.png)
