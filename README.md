@@ -29,24 +29,23 @@
 - curl - для отправки данных в DefectDojo
 - jq - для красивого отображания получаемого в ответ json
 
-# TODO:
+## Пример реализации на инфраструктуре gitlab
+Просто смотреть исходник на github не очень интересно. Лучше смотреть на [работающие пайплайны](https://gitlab.com/common_security_pipeline/common_security_pipeline).
+
+## TODO:
 - генерация пайплайна в рантайме на основе шаблонов jinja2
 - добавление security-тулов
 
-# Участники проекта:
+## Доп. материалы:
+Презентация [ZeroNights2021](https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8)
+
+## Участники проекта:
 - [Максим Мошаров](https://www.linkedin.com/in/maxim-mosharov-50904113b/) - дал много полезной информации на старте
 - [Александр Вознесенский](https://www.linkedin.com/in/voznesensky/) - реализация ранних версий пайплайна
 - [Вацлав Довнар](https://www.linkedin.com/in/vatclav-dovnar/) - стратегическое сопровождение, полный рефакторинг, вывод в паблик
 - [Георгий Старостин](https://www.linkedin.com/in/georgii-starostin-06932942/) - здоровая критика
 
-# Реализация на инфраструктуре gitlab
-Просто смотреть исходник на github не очень интересно. Лучше смотреть на [работающие пайплайны](https://gitlab.com/common_security_pipeline/common_security_pipeline)
-
-
-## Доп. материалы:
-Презентация [ZeroNights2021](https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8)
-
-# Спонсор
+## Спонсор проекта
 ![](static/img/city.logo.png)
 
 ## Лицензия
