@@ -63,3 +63,7 @@ https://gitlab.com/common_security_pipeline/common_security_pipeline
 ## доп материалы:
 презентация: https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8
 
+
+## License
+
+common_security_pipeline лицензируется под [Apache License 2.0](LICENSE.md)
