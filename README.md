@@ -4,12 +4,12 @@
 - GitLab
 - DefectDojo
 - OpenSouce tools
-  - gitleaks
-  - trufflehog
-  - dependency check
-  - gosec
-  - phpcs
-  - semgrep
+  - (gitleaks)[https://github.com/zricethezav/gitleaks]
+  - (trufflehog)[https://github.com/trufflesecurity/truffleHog]
+  - (dependency check)[https://github.com/jeremylong/DependencyCheck]
+  - (gosec)[https://github.com/securego/gosec]
+  - (phpcs)[https://github.com/FloeDesignTechnologies/phpcs-security-audit]
+  - (semgrep)[https://github.com/returntocorp/semgrep]
 Используйте данный репозиторий чтобы построить безопасность в цикле CI/CD.
 
 ## Quick Start
@@ -19,7 +19,7 @@
 4. Поднять у себя [DefectDojo](https://github.com/DefectDojo/django-DefectDojo/blob/master/DOCKER.md)
 5. Прописать у себя в GitLab необходимые переменные:
   - API-ключ
-  - Путь до DefectDojo для доступа к вашему DefectDojo в файле ./dd_prepare/dd_prepare.py. 
+  - Путь до DefectDojo для доступа к вашему DefectDojo в файле `./dd_prepare/dd_prepare.py`.
   - Если у вас используется Vault или аналогичное решение, то дороботать код проекта для получения API в runtime самостоятельно
 
 ## Security Tools
@@ -39,11 +39,11 @@
 - [Георгий Старостин](https://www.linkedin.com/in/georgii-starostin-06932942/) - здоровая критика
 
 # Реализация на инфраструктуре gitlab
-Просто смотреть исходник на github не очень интересно. Лучше смотреть на работающие пайплайны
-https://gitlab.com/common_security_pipeline/common_security_pipeline
+Просто смотреть исходник на github не очень интересно. Лучше смотреть на (работающие пайплайны)[https://gitlab.com/common_security_pipeline/common_security_pipeline]
+
 
 ## Доп. материалы:
-презентация: https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8
+Презентация (ZeroNights2021)[https://docs.google.com/presentation/d/11h8trTpEXv35gEjP2mbRB7DK2J4PTpk_lzWMtwK9l5E/edit#slide=id.p8] 
 
 # Спонсор
 ![](static/img/city.logo.png)
