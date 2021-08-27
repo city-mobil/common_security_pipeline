@@ -2,7 +2,7 @@
 ## Описание проекта:
 Данный проект является вариантом реализации DevSecOps практик, на базе:
 - GitLab
-- DefectDojo
+- [DefectDojo](https://github.com/DefectDojo/django-DefectDojo/]
 - OpenSouce tools
   - [gitleaks](https://github.com/zricethezav/gitleaks)
   - [trufflehog](https://github.com/trufflesecurity/truffleHog)
