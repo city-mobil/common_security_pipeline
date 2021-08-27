@@ -66,4 +66,4 @@ https://gitlab.com/common_security_pipeline/common_security_pipeline
 
 ## License
 
-common_security_pipeline лицензируется под [Apache License 2.0](LICENSE.md)
+common_security_pipeline лицензируется под [Apache License 2.0](LICENSE)
